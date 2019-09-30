@@ -27,7 +27,8 @@ app.use(
 
 // home route
 app.get('/', (req, res, next) => {
-  res.sendFile(__dirname + '/views/index.html');
+  console.log("/ route session id : ", req.sessionID)
+  res.sendFile(__dirname + '/views/landing-page.html');
 });
 
 // handles the routes except home route

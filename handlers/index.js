@@ -1,7 +1,7 @@
 const randomString = require('randomstring');
 const qs = require('querystring');
 const request = require('request');
-
+const path = require('path');
 const redirect_uri = process.env.HOST + '/redirect';
 
 // handles login by redirecting the user to github to sign in
@@ -26,28 +26,29 @@ exports.login = (req, res, next) => {
 exports.logout = (req, res, error) => {
   req.session.destroy((err) => {
     if(err) {
-        return console.log(err);
+      return next({
+        status: 500,
+        message: "Oops, Something went wrong"
+      });
     }
     res.redirect('/');
   });
 }
 
-// handles getting user emails from github
+// handles user route
 exports.user = (req, res) => {
-  // GET request to get emails
-  // this time the token is in header instead of a query string
-  request.get({
-      url: 'https://api.github.com/user/public_emails',
-      headers: {
-        Authorization: 'token ' + req.session.access_token,
-        'User-Agent': 'OAuth-iIth-GitHub-App'
-      }
-    },
-    (error, response, body) => {
-      res.send(body);
-    }
-  );
+  console.log(req.session)
+  console.log("/user route session id : ", req.sessionID)
+  // res.json(req.session.user);  
+  res.sendFile(path.join(__dirname, '../views/user-page.html'));
 }
+
+// handles home route
+exports.home = (req, res) => {
+  console.log("/home route session id : ", req.sessionID)
+  res.sendFile(path.join(__dirname, '../views/home-page.html'));
+}
+
 
 // handles redirect from git hub after authentication 
 exports.redirect = (req, res) => {
@@ -88,9 +89,23 @@ exports.redirect = (req, res) => {
 
         req.session.access_token = qs.parse(body).access_token;
 
-        // Redirects user to /user page so we can use
-        // the token to get some data.
-        res.redirect('/user');
+        // GET request to get emails
+        // this time the token is in header instead of a query string
+        request.get({
+            url: 'https://api.github.com/user',
+            headers: {
+              Authorization: 'token ' + req.session.access_token,
+              'User-Agent': 'OAuth-iIth-GitHub-App'
+            }
+          },
+          (error, response, body) => {
+            const { login, avatar_url, repos_url, type, name, company, blog, location, email, bio } = JSON.parse(body);
+            req.session.user = { login, avatar_url, repos_url, type, name, company, blog, location, email, bio };
+            // Redirects user to /user page so we can use
+            // the token to get some data.
+            res.redirect('/user');
+          }
+        );
       }
     );
   } else {

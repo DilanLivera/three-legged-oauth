@@ -4,10 +4,7 @@ exports.loginRequired = function (req, res, next) {
     if (req.session.access_token) {
       return next();
     } else {
-      return next({
-        status: 401,
-        message: "Please log in first"
-      });
+      res.redirect('/login');
     }
   } catch (err) {
     return next({
