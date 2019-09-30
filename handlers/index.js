@@ -4,7 +4,7 @@ const request = require('request');
 
 const redirect_uri = process.env.HOST + '/redirect';
 
-// handles redirecting the user to github to sign in
+// handles login by redirecting the user to github to sign in
 exports.login = (req, res, next) => {
   // generate that csrf_string for your "state" parameter
   req.session.csrf_string = randomString.generate();
@@ -20,6 +20,16 @@ exports.login = (req, res, next) => {
     });
   // redirect user with express
   res.redirect(githubAuthUrl);
+}
+
+// handles logout
+exports.logout = (req, res, error) => {
+  req.session.destroy((err) => {
+    if(err) {
+        return console.log(err);
+    }
+    res.redirect('/');
+  });
 }
 
 // handles getting user emails from github
@@ -42,8 +52,8 @@ exports.user = (req, res) => {
 // handles redirect from git hub after authentication 
 exports.redirect = (req, res) => {
   // Here, the req is request object sent by GitHub
-  console.log('Request sent by GitHub: ');
-  console.log(req.query);
+  // console.log('Request sent by GitHub: ');
+  // console.log(req.query);
 
   /* 
     req.query should look like this:

@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-const { login, user, redirect } = require('../handlers/');
+const { login, logout, user, redirect } = require('../handlers/');
+const { loginRequired, ensureCorrectUser } = require("../middleware/auth");
 
 router.get('/login', login);
-router.get('/user', user);
+router.get('/logout', logout);
+router.get('/user', loginRequired, user);
 /*
   Handle the response your application gets.
   Using router.all make sures no matter the provider sent you get or post request, they will all be handled
