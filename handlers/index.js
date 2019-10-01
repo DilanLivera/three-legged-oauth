@@ -2,7 +2,6 @@
 const randomString = require('randomstring');
 const qs = require('querystring');
 const request = require('request');
-const path = require('path');
 const redirect_uri = process.env.HOST + '/redirect';
 
 // handles login by redirecting the user to github to sign in

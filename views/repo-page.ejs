@@ -41,7 +41,10 @@
               <li class="p-1 list-group-item-action">
                 <span class="font-weight-bold font-italic">
                   Created At:
-                  <span class="font-weight-normal font-italic"><%= value.created_at %></span>
+                  <span class="font-weight-normal font-italic">
+                    <% let date = new Date(value.created_at)%>
+                    <%= date.toDateString() %>
+                  </span>
                 </span>
               </li>
               <li class="p-1 list-group-item-action">
