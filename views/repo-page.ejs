@@ -11,40 +11,40 @@
     <div class="container">
       <div class="row mb-4">
         <% for(let [key, value] of Object.entries(repos)) { %>
-          <div class="col-md-6">
-            <ul class="list-group list-group-flush mt-4 repo-component"></ul>
-              <li class="list-group-item list-group-item-action">
-                <span class="font-weight-bold font-italic">
+          <div class="col-md-6 repo-component">
+            <ul class="list-group mt-4 p-3">
+              <li class="p-1 list-group-item-action">
+                <span class="font-weight-bold font-italic ">
                   Name: 
                   <span class="font-weight-normal font-italic"><%= value.name %></span>
               </span>
               </li>
-              <li class="list-group-item list-group-item-action">
+              <li class="p-1 list-group-item-action">
                 <span class="font-weight-bold font-italic">
                   Url: 
                   <span class="font-weight-normal font-italic">
                   <a href="<%= value.html_url %>"><%= value.html_url %></span></a>
                 </span>
               </li>
-              <li class="list-group-item list-group-item-action">
+              <li class="p-1 list-group-item-action">
                 <span class="font-weight-bold font-italic">
                   Description: 
                   <span class="font-weight-normal font-italic"><%= value.description %></span>
                 </span>
               </li>
-              <li class="list-group-item list-group-item-action">
+              <li class="p-1 list-group-item-action">
                 <span class="font-weight-bold font-italic">
                   Fork: 
                   <span class="font-weight-normal font-italic"><%= value.fork %></span>
                 </span>
               </li>
-              <li class="list-group-item list-group-item-action">
+              <li class="p-1 list-group-item-action">
                 <span class="font-weight-bold font-italic">
                   Created At:
                   <span class="font-weight-normal font-italic"><%= value.created_at %></span>
                 </span>
               </li>
-              <li class="list-group-item list-group-item-action">
+              <li class="p-1 list-group-item-action">
                 <span class="font-weight-bold font-italic">
                   Language: 
                   <span class="font-weight-normal font-italic"><%= value.language %></span>

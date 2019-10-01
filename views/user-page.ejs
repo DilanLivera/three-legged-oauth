@@ -19,48 +19,46 @@
         </div>
       </div>
       <div class="col-md-6">
-        <div class="card mt-4 mb-5">
-          <ul class="list-group list-group-flush">
-            <!-- login, avatar_url, repos_url, type, name, company, blog, location, email, bio -->
+        <div class="card mt-4 mb-5 ">          
+          <!-- login, avatar_url, repos_url, type, name, company, blog, location, email, bio -->
+          <li class="list-group-item">
+            <span class="font-weight-bold">Name: </span>
+            <span class="font-italic"><%= user.login %></span>
+          </li>
+          <li class="list-group-item">
+            <span class="font-weight-bold">Repos: </span>
+            <span class="font-italic">
+              <a href="<%= user.repos_url %>"><%= user.repos_url %></a>
+            </span>
+          </li>
+          <li class="list-group-item">
+            <span class="font-weight-bold">Type: </span>
+            <span class="font-italic">
+              <%= user.type %>
+            </span>
+          </li>
+          <% if(user.company) { %>
             <li class="list-group-item">
-              <span class="font-weight-bold">Name: </span>
-              <span class="font-italic"><%= user.login %></span>
+              <span class="font-weight-bold">Company: </span>
+              <span class="font-italic"><%= user.company %></span>
             </li>
+          <% } %>
+          <li class="list-group-item">
+            <span class="font-weight-bold">Blog: </span>
+            <span class="font-italic">
+              <a href="<%= user.blog %>"><%= user.blog %></a>
+            </span>
+          </li>
+          <li class="list-group-item">
+            <span class="font-weight-bold">Location: </span>
+            <span class="font-italic"><%= user.location %></span>
+          </li>
+          <% if(user.email) { %>
             <li class="list-group-item">
-              <span class="font-weight-bold">Repos: </span>
-              <span class="font-italic">
-                <a href="<%= user.repos_url %>"><%= user.repos_url %></a>
-              </span>
+              <span class="font-weight-bold">Email: </span>
+              <span class="font-italic"><%= user.email %></span>
             </li>
-            <li class="list-group-item">
-              <span class="font-weight-bold">Type: </span>
-              <span class="font-italic">
-                <%= user.type %>
-              </span>
-            </li>
-            <% if(user.company) { %>
-              <li class="list-group-item">
-                <span class="font-weight-bold">Company: </span>
-                <span class="font-italic"><%= user.company %></span>
-              </li>
-            <% } %>
-            <li class="list-group-item">
-              <span class="font-weight-bold">Blog: </span>
-              <span class="font-italic">
-                <a href="<%= user.blog %>"><%= user.blog %></a>
-              </span>
-            </li>
-            <li class="list-group-item">
-              <span class="font-weight-bold">Location: </span>
-              <span class="font-italic"><%= user.location %></span>
-            </li>
-            <% if(user.email) { %>
-              <li class="list-group-item">
-                <span class="font-weight-bold">Email: </span>
-                <span class="font-italic"><%= user.email %></span>
-              </li>
-            <% } %>
-          </ul>
+          <% } %>          
         </div>
       </div>
     </div>
