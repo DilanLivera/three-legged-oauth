@@ -1,3 +1,4 @@
+
 const randomString = require('randomstring');
 const qs = require('querystring');
 const request = require('request');
@@ -37,16 +38,27 @@ exports.logout = (req, res, error) => {
 
 // handles user route
 exports.user = (req, res) => {
-  console.log(req.session)
-  console.log("/user route session id : ", req.sessionID)
-  // res.json(req.session.user);  
-  res.sendFile(path.join(__dirname, '../views/user-page.html'));
+  res.render("user-page", { user: req.session.user });
 }
 
 // handles home route
 exports.home = (req, res) => {
-  console.log("/home route session id : ", req.sessionID)
-  res.sendFile(path.join(__dirname, '../views/home-page.html'));
+  // /users/:username/repos
+  request.get({
+    url: `https://api.github.com/users/${req.session.user.login}/repos?` +
+      qs.stringify({
+        type: "owner",
+        sort: "created"
+      })
+    ,
+    headers: {
+      Authorization: 'token ' + req.session.access_token,
+      'User-Agent': 'OAuth-iIth-GitHub-App'
+    }
+  },
+  (error, response, body) => {
+    res.render("repo-page", { repos: JSON.parse(body) });
+  });
 }
 
 

@@ -11,6 +11,7 @@ const routes = require("./routes/");
 
 const port = process.env.PORT || 3000;
 
+app.set("view engine", "ejs");
 // serve static files
 app.use(express.static('views'));
 app.use(express.static(__dirname + "/public"));
@@ -27,8 +28,7 @@ app.use(
 
 // home route
 app.get('/', (req, res, next) => {
-  console.log("/ route session id : ", req.sessionID)
-  res.sendFile(__dirname + '/views/landing-page.html');
+  res.render("landing-page", { loggedIn: !!req.session.user });
 });
 
 // handles the routes except home route

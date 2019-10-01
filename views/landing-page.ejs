@@ -1,0 +1,11 @@
+<!-- add header page -->
+<% include ./partials/header %>
+  <div class="container">
+    <% if(loggedIn) { %>
+      <a id="logout-button" href="/logout">Logout</a>
+    <% } else { %>
+      <a id="login-button" href="/login">Log In With GitHub</a>
+    <% } %>    
+  </div>
+<!-- add footer page -->
+<% include ./partials/footer %>

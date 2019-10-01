@@ -1,0 +1,69 @@
+<!-- add header page -->
+<% include ./partials/header %>
+  <div class="container">
+    <div class="navbar navbar-expand-lg navbar-light bg-light justify-content-md-between">
+      <span class="navbar-brand h1">User</span>
+      <div>
+        <a class="btn btn-sm btn-outline-primary" href="/home">Repos</a>
+        <a id="logout-button" class="btn btn-sm btn-secondary" href="/logout">Logout</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card mt-4 mb-2">
+          <img src="<%= user.avatar_url %>" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title"><%= user.name %></h5>
+            <p class="card-text"><%= user.bio %></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card mt-4 mb-5">
+          <ul class="list-group list-group-flush">
+            <!-- login, avatar_url, repos_url, type, name, company, blog, location, email, bio -->
+            <li class="list-group-item">
+              <span class="font-weight-bold">Name: </span>
+              <span class="font-italic"><%= user.login %></span>
+            </li>
+            <li class="list-group-item">
+              <span class="font-weight-bold">Repos: </span>
+              <span class="font-italic">
+                <a href="<%= user.repos_url %>"><%= user.repos_url %></a>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="font-weight-bold">Type: </span>
+              <span class="font-italic">
+                <%= user.type %>
+              </span>
+            </li>
+            <% if(user.company) { %>
+              <li class="list-group-item">
+                <span class="font-weight-bold">Company: </span>
+                <span class="font-italic"><%= user.company %></span>
+              </li>
+            <% } %>
+            <li class="list-group-item">
+              <span class="font-weight-bold">Blog: </span>
+              <span class="font-italic">
+                <a href="<%= user.blog %>"><%= user.blog %></a>
+              </span>
+            </li>
+            <li class="list-group-item">
+              <span class="font-weight-bold">Location: </span>
+              <span class="font-italic"><%= user.location %></span>
+            </li>
+            <% if(user.email) { %>
+              <li class="list-group-item">
+                <span class="font-weight-bold">Email: </span>
+                <span class="font-italic"><%= user.email %></span>
+              </li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- add footer page -->
+<% include ./partials/footer %>
