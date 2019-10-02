@@ -37,7 +37,7 @@ exports.logout = (req, res, error) => {
 
 // handles user route
 exports.user = (req, res) => {
-  res.render("user-page", { user: req.session.user });
+  res.status(200).render("user-page", { user: req.session.user });
 }
 
 // handles home route

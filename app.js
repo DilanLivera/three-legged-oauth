@@ -9,8 +9,6 @@ const randomString = require('randomstring');
 const errorHandler = require("./handlers/error");
 const routes = require("./routes/");
 
-const port = process.env.PORT || 3000;
-
 app.set("view engine", "ejs");
 // serve static files
 app.use(express.static('views'));
@@ -44,6 +42,4 @@ app.use(function(req, res, next) {
 // set the error handler
 app.use(errorHandler);
 
-app.listen(port, () => {
-  console.log('Server listening at port ' + port);
-});
+module.exports = app;

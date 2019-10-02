@@ -2,9 +2,9 @@
   "name": "three-legged-oauth",
   "version": "1.0.0",
   "description": "3-legged OAuth with GitHub",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "nodemon start"
   },
   "author": "Dilan Livera",
@@ -16,5 +16,15 @@
     "express-session": "^1.16.2",
     "randomstring": "^1.1.5",
     "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0",
+    "supertest": "^4.0.2"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   }
 }
